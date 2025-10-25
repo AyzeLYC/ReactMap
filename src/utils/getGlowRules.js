@@ -1,5 +1,5 @@
 // @ts-check
-const OPERATOR = /** @type {Record<string, (a: number, b: number) => boolean>} */ ({
+const OPERATOR = /** @type { Record< string, ( a: number, b: number ) => boolean >} */ ({
   
     '=': (a, b) => a === b,
     '<': (a, b) => a < b,
