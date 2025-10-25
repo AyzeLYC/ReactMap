@@ -1,6 +1,6 @@
 // @ts-check
 
-import ReactGA from 'react-ga4'
+import ReactGA from 'react-ga4';
 
 /**
  *
@@ -9,22 +9,19 @@ import ReactGA from 'react-ga4'
  * @param {string} [label]
  * @param {boolean} [nonInteraction]
  */
-export function analytics(
-  category,
-  action = '',
-  label = '',
-  nonInteraction = false,
-) {
+export function analytics( category, action = '', label = '', nonInteraction = false ) {
+  
   if (CONFIG.googleAnalyticsId) {
+    
     if (action) {
-      ReactGA.event({
-        category,
-        action,
-        label,
-        nonInteraction,
-      })
+      
+      ReactGA.event({ category, action, label, nonInteraction });
+      
     } else {
-      ReactGA.pageview(category)
-    }
-  }
-}
+      
+      ReactGA.pageview(category);
+    };
+    
+  };
+  
+};
