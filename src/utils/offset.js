@@ -19,6 +19,7 @@ export const cyrb53 = ( str, seed = 0 ) => {
     h2 = Math.imul( h2 ^ ch, 1597334677 );
     
   };
+  
   h1 = Math.imul( h1 ^ ( h1 >>> 16 ), 2246822507 ) ^ Math.imul( h2 ^ ( h2 >>> 13 ), 3266489909 );
   h2 = Math.imul( h2 ^ ( h2 >>> 16 ), 2246822507 ) ^ Math.imul( h1 ^ ( h1 >>> 13 ), 3266489909 );
   
