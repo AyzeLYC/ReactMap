@@ -1,33 +1,53 @@
 // @ts-check
 
-/** @param {any} item */
+/**
+ * @param {any} item
+**/
 function isObject(item) {
-  return (
-    item && typeof item === 'object' && !Array.isArray(item) && item !== null
-  )
-}
+  
+  return ( item && typeof item === 'object' && !Array.isArray(item) && item !== null );
+  
+};
 
 /**
  * @template T
  * @param {T} target
  * @param {...T} sources
- */
-export function deepMerge(target, ...sources) {
-  if (!sources.length) return target
-  const source = sources.shift()
+**/
+export function deepMerge( target, ...sources ) {
+  
+  if (!sources.length) {
+    
+    return target;
+    
+  };
+  
+  const source = sources.shift();
 
   if (isObject(target) && isObject(source)) {
+    
     Object.keys(source).forEach((key) => {
+      
       if (isObject(source[key])) {
+        
         if (!target[key]) {
-          Object.assign(target, { [key]: {} })
-        }
-        deepMerge(target[key], source[key])
+          
+          Object.assign( target, { [key]: {} } );
+          
+        };
+        
+        deepMerge(target[key], source[key]);
+        
       } else {
-        Object.assign(target, { [key]: source[key] })
-      }
-    })
-  }
+        
+        Object.assign( target, { [key]: source[key] });
+        
+      };
+      
+    });
+    
+  };
 
-  return deepMerge(target, ...sources)
-}
+  return deepMerge(target, ...sources);
+  
+};
