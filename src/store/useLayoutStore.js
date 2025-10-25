@@ -5,6 +5,7 @@ import { useStorage } from './useStorage';
 
 /**
  * @typedef {{
+ 
     nestSubmissions: { id: string | number, name: string },
     help: { open: boolean, category: string },
     motd: boolean,
@@ -19,6 +20,7 @@ import { useStorage } from './useStorage';
     dialog: { open: boolean, category: keyof import( '@rm/types' ).UIObject | 'notifications' | '', type: 'options' | 'filters' | '' },
     gymBadge: { open: boolean, gymId: string, badge: number },
     slotSelection: string
+    
    }} UseLayoutStore
  *
  * @type { import( "zustand" ).UseBoundStore< import( "zustand" ).StoreApi<UseLayoutStore > > }
