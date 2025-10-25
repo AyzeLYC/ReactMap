@@ -23,10 +23,12 @@ export function getRewardInfo( {
   quest_reward_type
   
 } ) {
-  const { Icons } = useMemory.getState()
-  let src = ''
-  let amount = 0
-  let tt = /** @type {string[] | string} */ ('')
+  
+  const { Icons } = useMemory.getState();
+  
+  let src = '';
+  let amount = 0;
+  let tt = /** @type { string[] | string } */ ('');
 
   switch ( quest_reward_type ) {
       
