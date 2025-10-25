@@ -2,7 +2,7 @@
 import { useMemory } from '@store/useMemory';
 import { useStorage } from '@store/useStorage';
 
-/** @param { keyof import( '@store/useStorage' ).UseStorage & keyof import( '@store/useMemory' ).UseMemory} key */
+/** @param { keyof import( '@store/useStorage' ).UseStorage & keyof import( '@store/useMemory' ).UseMemory } key */
 const resetState = ( key ) => {
   
   const state = useMemory.getState()[ key ];
