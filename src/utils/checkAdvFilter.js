@@ -104,4 +104,5 @@ export function checkIVFilterValid(filter, dnf = true) {
   };
   
   return true;
+  
 };
