@@ -3,7 +3,7 @@ import { useStorage } from '@store/useStorage';
 
 const METERS_PER_MILE = 1609.344;
 
-export function formatDistance(
+export function formatDistance (
   
   meters = 0,
   unit = useStorage.getState().settings.distanceUnit,
