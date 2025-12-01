@@ -4,7 +4,7 @@
  * @param { number } currentStamp
  * @param { number } desiredStamp
 **/
-export function dayCheck( currentStamp, desiredStamp ) {
+export function dayCheck ( currentStamp, desiredStamp ) {
   
   const locale = localStorage.getItem( 'i18nextLng' ) || 'en';
   
