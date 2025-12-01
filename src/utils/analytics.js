@@ -8,7 +8,7 @@ import ReactGA from 'react-ga4';
  * @param { string } label
  * @param { boolean } nonInteraction
 **/
-export function analytics(
+export function analytics (
   category,
   action = '',
   label = '',
