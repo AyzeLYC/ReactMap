@@ -28,49 +28,52 @@ export function applyToAll(
   includeSlots = false,
 ) {
   const storageState = useStorage.getState();
-  const localFilters = storageState.filters?.[category] ?? {};
+  const localFilters = storageState.filters?.[ ( category ) ] ?? {}; /* do not remove () in [ ( category ) ] because setting it to [category] would search for the key named category in the keys and not the wanted category but they can be replaced ny `${category}` */
   const easyMode = !!localFilters.easyMode;
   const userFilters = localFilters.filter ?? {};
 
-  const serverFilters = useMemory.getState().filters[category];
-  const staticFilters = Object.entries(serverFilters?.filter ?? {});
+  const serverFilters = useMemory.getState().filters[ ( category ) ];
+  const staticFilters = Object.entries( serverFilters?.filter ?? {} );
   const refFilter = serverFilters?.standard ?? STANDARD_BACKUP;
 
-  const idSet = new Set(selectedIds ?? []);
+  const idSet = new Set( selectedIds ?? [] );
 
-  const menuSelections = storageState.menus?.[category]?.filters ?? {};
-  const hasMenuFiltersApplied = Object.values(menuSelections).some((options) =>
-    Object.values(options || {}).some(Boolean),
+  const menuSelections = storageState.menus?.[ ( category ) ]?.filters ?? {};
+  const hasMenuFiltersApplied = Object.values( menuSelections ).some( ( options ) =>
+    Object.values( options || {} ).some( Boolean ))
   );
   const advancedSearch =
     /** @type {string | undefined} */ (
-      storageState.searches?.[`${category}Advanced`]
+      storageState.searches?.[`${ category }Advanced`]
     ) ?? '';
-  const hasSearchApplied =
-    typeof advancedSearch === 'string' && advancedSearch.trim().length > 0;
+  const hasSearchApplied = typeof advancedSearch === 'string' && advancedSearch.trim().length > 0;
 
   const newObj = Object.fromEntries(
-    staticFilters.flatMap(([key, staticFilter]) => {
+    
+    staticFilters.flatMap( ( [key, staticFilter] ) => {
       
-      const filter = userFilters[key] ?? staticFilter ?? refFilter;
+      const filter = userFilters[ ( key ) ] ?? staticFilter ?? refFilter;
       const filters = [
         [
           key,
-          idSet.has(key)
+          idSet.has( key )
             ? { size: 'md', ...filter, ...newFilter, all: !!easyMode }
-            : filter,
+            : filter
         ],
       ];
       
-      if (key.startsWith('t') && +key.charAt(1) !== 0 && includeSlots) {
+      if ( key.startsWith( 't' ) && +key.charAt( 1 ) !== 0 && includeSlots ) {
+        
         filters.push(
-          ...Object.entries(generateSlots(key, newFilter.enabled, userFilters)),
-        )
+          ...Object.entries( generateSlots( key, newFilter.enabled, userFilters ) ),
+        );
+        
       };
       
       return filters;
       
     })
+    
   );
   
   if (
@@ -102,12 +105,14 @@ export function applyToAll(
   ) {
     
     newObj.global = {
+      
       ...newObj.global,
-      enabled: newFilter.enabled,
+      enabled: newFilter.enabled
+      
     };
     
   };
   
-  setDeepStore(`filters.${category}.filter`, newObj);
+  setDeepStore( `filters.${ category }.filter`, newObj );
   
 };
