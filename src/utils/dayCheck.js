@@ -1,8 +1,8 @@
 // @ts-check
 
 /**
- * @param {number} currentStamp
- * @param {number} desiredStamp
+ * @param { number } currentStamp
+ * @param { number } desiredStamp
 **/
 export function dayCheck( currentStamp, desiredStamp ) {
   
