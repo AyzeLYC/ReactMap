@@ -5,27 +5,29 @@ import { useStorage, setDeepStore } from '@store/useStorage';
 import { generateSlots } from '@utils/generateSlots';
 
 export const STANDARD_BACKUP =
-  /** @type {import('@rm/types/lib').BaseFilter} **/ ({
+  /** @type {import('@rm/types/lib').BaseFilter} **/ ( {
     
     enabled: false,
     size: 'md',
     all: false,
     adv: ''
     
-});
+} );
 
 /**
- * @template {import('@rm/types').Categories} T
- * @param {import('@rm/types').ClientFilters<T>} newFilter
- * @param {T} category
- * @param {string[]} [selectedIds]
- * @param {boolean} [includeSlots]
+ * @template { import('@rm/types').Categories } T
+ * @param { import('@rm/types').ClientFilters<T> } newFilter
+ * @param { T } category
+ * @param { string[] } [selectedIds]
+ * @param { boolean } [includeSlots]
 **/
-export function applyToAll(
+export function applyToAll (
+  
   newFilter,
   category,
   selectedIds = [],
-  includeSlots = false,
+  includeSlots = false
+  
 ) {
   const storageState = useStorage.getState();
   const localFilters = storageState.filters?.[ ( category ) ] ?? {}; /* do not remove () in [ ( category ) ] because setting it to [category] would search for the key named category in the keys and not the wanted category but they can be replaced ny `${category}` */
@@ -43,7 +45,7 @@ export function applyToAll(
     Object.values( options || {} ).some( Boolean ))
   );
   const advancedSearch =
-    /** @type {string | undefined} */ (
+    /** @type { string | undefined } */ (
       storageState.searches?.[`${ category }Advanced`]
     ) ?? '';
   const hasSearchApplied = typeof advancedSearch === 'string' && advancedSearch.trim().length > 0;
@@ -54,18 +56,22 @@ export function applyToAll(
       
       const filter = userFilters[ ( key ) ] ?? staticFilter ?? refFilter;
       const filters = [
+        
         [
           key,
           idSet.has( key )
             ? { size: 'md', ...filter, ...newFilter, all: !!easyMode }
             : filter
-        ],
+        ]
+        
       ];
       
       if ( key.startsWith( 't' ) && +key.charAt( 1 ) !== 0 && includeSlots ) {
         
         filters.push(
-          ...Object.entries( generateSlots( key, newFilter.enabled, userFilters ) ),
+          
+          ...Object.entries( generateSlots( key, newFilter.enabled, userFilters ) )
+          
         );
         
       };
