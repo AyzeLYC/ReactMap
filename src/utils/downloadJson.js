@@ -4,7 +4,7 @@
  * @param { object } json
  * @param { `${string}.json` } fileName
 **/
-export function downloadJson( json, fileName ) {
+export function downloadJson ( json, fileName ) {
   
   if ( json ) {
     
