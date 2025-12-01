@@ -7,7 +7,7 @@
  * @param { string } filter
  * @param { boolean } dnf
 **/
-export function checkIVFilterValid( filter, dnf = true ) {
+export function checkIVFilterValid ( filter, dnf = true ) {
   
   const input = filter.toUpperCase();
   const tokenizer = /\s*([()|&!,]|([ADSLXG]?|CP|LC|[GU]L)\s*([0-9]+(?:\.[0-9]*)?)(?:\s*-\s*([0-9]+(?:\.[0-9]*)?))?)/g;
