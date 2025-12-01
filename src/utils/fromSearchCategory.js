@@ -1,21 +1,33 @@
 // @ts-check
 
 /**
- *
- * @param {string} searchCategory
- * @returns {string}
- */
-export function fromSearchCategory(searchCategory) {
-  switch (searchCategory) {
+ * @param { string } searchCategory
+ * @returns { string }
+**/
+export function fromSearchCategory ( searchCategory ) {
+  
+  switch ( searchCategory ) {
+      
     case 'lures':
+      
     case 'nests':
+      
     case 'quests':
+      
     case 'invasions':
-      return 'pokestops'
+      
+      return 'pokestops';
+      
     case 'gyms':
+      
     case 'raids':
-      return 'gyms'
+      
+      return 'gyms';
+      
     default:
-      return searchCategory
-  }
-}
+      
+      return searchCategory;
+      
+  };
+  
+};
