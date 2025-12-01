@@ -2,18 +2,29 @@
 
 /**
  * Get rank badge, commonly used for pvp and contests
- * @param {number} rank
+ * @param { number } rank
  * @returns
- */
-export const getBadge = (rank) => {
-  switch (rank) {
+**/
+export const getBadge = ( rank ) => {
+  
+  switch ( rank ) {
+      
     case 1:
-      return 'first'
+      
+      return 'first';
+      
     case 2:
-      return 'second'
+      
+      return 'second';
+      
     case 3:
-      return 'third'
+      
+      return 'third';
+      
     default:
-      return ''
-  }
-}
+      
+      return '';
+      
+  };
+  
+};
