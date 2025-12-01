@@ -7,7 +7,7 @@
 **/
 export function normalizeCategory ( category ) {
   
-  if (!category) {
+  if ( !category ) {
     
     return '';
     
@@ -15,7 +15,7 @@ export function normalizeCategory ( category ) {
   
   const lower = category.toLowerCase();
   
-  switch (lower) {
+  switch ( lower ) {
       
     case 'raids':
       
