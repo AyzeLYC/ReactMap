@@ -12,18 +12,18 @@ const OPERATOR =
  *
  * @param { ReturnType< import( 'server/src/ui/clientOptions' )[ 'clientOptions' ]>[ 'clientMenus' ][ 'pokemon' ][ 'glow' ][ 'sub' ] } glowRules
  * @returns { ( ( pkmn: import( '@rm/types' ).Pokemon ) => string | null )[] }
- */
-export function getGlowRules(glowRules) {
+**/
+export function getGlowRules( glowRules ) {
   
-  return Object.entries(glowRules)
-    .filter(([, value]) => value.op && value.op in OPERATOR)
-    .map(([key, { perm, op, num }]) => {
+  return Object.entries( glowRules )
+    .filter( ( [ , (value ) ] ) => value.op && value.op in OPERATOR )
+    .map( ( [ ( key ), { perm, op, num } ] ) => {
       
       const statKey = perm === 'iv' ? 'iv' : 'bestPvp';
-      const func = OPERATOR[op];
+      const func = OPERATOR[ ( op ) ];
       
       return (pkmn) =>
-        Number.isInteger(pkmn[statKey]) && func(pkmn[statKey], num) ? key : null;
-    });
+        Number.isInteger(pkmn[ ( statKey ) ]) && func(pkmn[ ( statKey ) ], num) ? key : null;
+    } );
   
 };
