@@ -1,49 +1,57 @@
 // @ts-check
-import { useMemory } from '@store/useMemory'
-import { useStorage } from '@store/useStorage'
+import { useMemory } from '@store/useMemory';
+import { useStorage } from '@store/useStorage';
 
-/** @param {keyof import('@store/useStorage').UseStorage & keyof import('@store/useMemory').UseMemory} key */
-const resetState = (key) => {
-  const memoryState = useMemory.getState()
-  const state = memoryState[key]
-  useStorage.setState({
-    [key]:
+/** @param { keyof import( '@store/useStorage' ).UseStorage & keyof import( '@store/useMemory' ).UseMemory } key **/
+const resetState = ( key ) => {
+  
+  const memoryState = useMemory.getState();
+  const state = memoryState[ ( key ) ];
+  
+  useStorage.setState( {
+    [ ( key ) ] :
       key === 'settings'
         ? Object.fromEntries(
-            Object.entries(state).map(([k, v]) => {
-              const defaultSetting = memoryState.config?.misc?.[k]
+            Object.entries(state).map( ( [ k, v ] ) => {
+              
+              const defaultSetting = memoryState.config?.misc?.[ ( k ) ];
+              
               return [
-                k,
-                defaultSetting !== undefined && defaultSetting in v
+                ( k ),
+                ( defaultSetting !== undefined && defaultSetting in v
                   ? defaultSetting
-                  : Object.keys(v)[0],
-              ]
-            }),
+                  : Object.keys( v )[ 0 ] )
+              ];
+              
+            } ),
           )
-        : structuredClone(state),
-  })
-}
+        : structuredClone( state )
+  } );
+};
 
-/** @param {'Audio' | 'Icons'} key */
-const resetAssets = (key) => {
-  useMemory.setState({ [key]: null })
-  useStorage.setState({ [key.toLowerCase()]: {} })
-}
+/** @param { 'Audio' | 'Icons' } key **/
+const resetAssets = ( key ) => {
+  
+  useMemory.setState( { [ ( key ) ] : null } );
+  useStorage.setState( { [ ( key.toLowerCase() ) ] : {} } );
+  
+};
 
-export const resetSettings = () => resetState('settings')
+export const resetSettings = () => resetState( 'settings' );
 
-export const resetMenus = () => resetState('menus')
+export const resetMenus = () => resetState( 'menus' );
 
-export const resetUserSettings = () => resetState('userSettings')
+export const resetUserSettings = () => resetState( 'userSettings' );
 
-export const resetFilters = () => resetState('filters')
+export const resetFilters = () => resetState( 'filters' );
 
-export const resetIcons = () => resetAssets('Icons')
+export const resetIcons = () => resetAssets( 'Icons' );
 
-export const resetAudio = () => resetAssets('Audio')
+export const resetAudio = () => resetAssets( 'Audio' );
 
 export const resetUI = () =>
-  useStorage.setState({
+  useStorage.setState( {
+    
     holidayEffects: {},
     tabs: {},
     searches: {},
@@ -56,38 +64,53 @@ export const resetUI = () =>
     profiling: false,
     tutorial: false,
     stateTraceLog: false,
-    darkMode: !!window?.matchMedia('(prefers-color-scheme: dark)').matches,
-  })
+    darkMode: !!window?.matchMedia('(prefers-color-scheme: dark)').matches
+    
+  } );
 
 export const resetLocation = () => {
-  const { config } = useMemory.getState()
-  useStorage.setState({
+  
+  const { config } = useMemory.getState();
+  
+  useStorage.setState( {
+    
     location: [config.general.startLat || 0, config.general.startLon || 0],
-    zoom: config.general.startZoom || 18,
-  })
-}
+    zoom: config.general.startZoom || 18
+    
+  } );
+  
+};
 
 export const resetAllGeneral = () => {
-  resetSettings()
-  resetMenus()
-  resetUserSettings()
-  resetIcons()
-  resetAudio()
-  resetUI()
-  resetLocation()
-}
+  
+  resetSettings();
+  resetMenus();
+  resetUserSettings();
+  resetIcons();
+  resetAudio();
+  resetUI();
+  resetLocation();
+  
+};
 
-/** @param {import('@rm/types').Categories} key */
-export const resetFilter = (key) => {
-  const reference = useMemory.getState().filters[key]
-  useStorage.setState((prev) => ({
-    filters: { ...prev.filters, [key]: structuredClone(reference) },
-  }))
-}
+/** @param { import( '@rm/types' ).Categories } key **/
+export const resetFilter = ( key ) => {
+  
+  const reference = useMemory.getState().filters[ ( key ) ];
+  
+  useStorage.setState( ( prev ) => ( {
+    
+    filters: { ...prev.filters, [ ( key ) ] : structuredClone( reference ) }
+    
+  } ) );
+  
+};
 
 export const hardReset = () => {
-  localStorage.clear()
-  sessionStorage.clear()
-  resetAllGeneral()
-  resetFilters()
-}
+  
+  localStorage.clear();
+  sessionStorage.clear();
+  resetAllGeneral();
+  resetFilters();
+  
+};
