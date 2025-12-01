@@ -6,61 +6,111 @@
 /**
  * @param {string} filter
  * @param {boolean} [dnf]
- */
+**/
 export function checkIVFilterValid(filter, dnf = true) {
-  const input = filter.toUpperCase()
-  const tokenizer =
-    /\s*([()|&!,]|([ADSLXG]?|CP|LC|[GU]L)\s*([0-9]+(?:\.[0-9]*)?)(?:\s*-\s*([0-9]+(?:\.[0-9]*)?))?)/g
-  let expectClause = true
-  let stack = 0
-  let lastIndex = 0
-  let match
+  
+  const input = filter.toUpperCase();
+  const tokenizer = /\s*([()|&!,]|([ADSLXG]?|CP|LC|[GU]L)\s*([0-9]+(?:\.[0-9]*)?)(?:\s*-\s*([0-9]+(?:\.[0-9]*)?))?)/g;
+  
+  let expectClause = true;
+  let stack = 0;
+  let lastIndex = 0;
+  let match;
+  
   while ((match = tokenizer.exec(input)) !== null) {
+    
     if (match.index > lastIndex) {
-      return null
-    }
+      
+      return null;
+      
+    };
+    
     if (expectClause) {
+      
       if (match[3] !== undefined) {
-        expectClause = false
+        
+        expectClause = false;
+        
       } else {
+        
         switch (match[1]) {
+            
           case '(':
+            
             if (dnf || ++stack > 1000000000) {
-              return null
-            }
-            break
+              
+              return null;
+              
+            };
+            
+            break;
+            
           case '!':
+            
             if (dnf) {
-              return null
-            }
-            break
+              
+              return null;
+              
+            };
+            
+            break;
+            
           default:
-            return null
-        }
-      }
+            
+            return null;
+            
+        };
+        
+      };
+      
     } else if (match[3] !== undefined) {
-      return null
+      
+      return null;
+      
     } else {
-      switch (match[1]) {
+      
+      switch ( match[1] ) {
+          
         case '(':
+          
         case '!':
-          return null
+          
+          return null;
+          
         case ')':
+          
           if (dnf || --stack < 0) {
-            return null
-          }
-          break
+            
+            return null;
+            
+          };
+          
+          break;
+          
         case '&':
+          
         case '|':
+          
         case ',':
-          expectClause = true
-          break
-      }
-    }
-    lastIndex = tokenizer.lastIndex
-  }
+          
+          expectClause = true;
+          
+          break;
+          
+      };
+      
+    };
+    
+    lastIndex = tokenizer.lastIndex;
+    
+  };
+  
   if (expectClause || stack !== 0 || lastIndex < filter.length) {
-    return null
-  }
-  return true
-}
+    
+    return null;
+    
+  };
+  
+  return true;
+  
+};
