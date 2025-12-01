@@ -1,7 +1,7 @@
 // @ts-check
 
 /** @param { any } item */
-function isObject( item ) {
+function isObject ( item ) {
   
   return (
     item && typeof item === 'object' && !Array.isArray(item) && item !== null
@@ -14,7 +14,7 @@ function isObject( item ) {
  * @param { T } target
  * @param { ...T } sources
 **/
-export function deepMerge( target, ...sources ) {
+export function deepMerge ( target, ...sources ) {
   
   if ( !sources.length ) {
     
