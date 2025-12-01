@@ -4,10 +4,10 @@
 /* eslint-disable default-case */
 
 /**
- * @param {string} filter
- * @param {boolean} [dnf]
+ * @param { string } filter
+ * @param { boolean } dnf
 **/
-export function checkIVFilterValid(filter, dnf = true) {
+export function checkIVFilterValid( filter, dnf = true ) {
   
   const input = filter.toUpperCase();
   const tokenizer = /\s*([()|&!,]|([ADSLXG]?|CP|LC|[GU]L)\s*([0-9]+(?:\.[0-9]*)?)(?:\s*-\s*([0-9]+(?:\.[0-9]*)?))?)/g;
@@ -17,27 +17,27 @@ export function checkIVFilterValid(filter, dnf = true) {
   let lastIndex = 0;
   let match;
   
-  while ((match = tokenizer.exec(input)) !== null) {
+  while ( ( match = tokenizer.exec( input ) ) !== null ) {
     
-    if (match.index > lastIndex) {
+    if ( match.index > lastIndex ) {
       
       return null;
       
     };
     
-    if (expectClause) {
+    if ( expectClause ) {
       
-      if (match[3] !== undefined) {
+      if ( match[ 3 ] !== undefined ) {
         
         expectClause = false;
         
       } else {
         
-        switch (match[1]) {
+        switch ( match[ 1 ] ) {
             
           case '(':
             
-            if (dnf || ++stack > 1000000000) {
+            if ( dnf || ++stack > 1000000000 ) {
               
               return null;
               
@@ -47,7 +47,7 @@ export function checkIVFilterValid(filter, dnf = true) {
             
           case '!':
             
-            if (dnf) {
+            if ( dnf ) {
               
               return null;
               
@@ -63,13 +63,13 @@ export function checkIVFilterValid(filter, dnf = true) {
         
       };
       
-    } else if (match[3] !== undefined) {
+    } else if ( match[ 3 ] !== undefined ) {
       
       return null;
       
     } else {
       
-      switch ( match[1] ) {
+      switch ( match[ 1 ] ) {
           
         case '(':
           
@@ -79,7 +79,7 @@ export function checkIVFilterValid(filter, dnf = true) {
           
         case ')':
           
-          if (dnf || --stack < 0) {
+          if ( dnf || --stack < 0 ) {
             
             return null;
             
@@ -105,7 +105,7 @@ export function checkIVFilterValid(filter, dnf = true) {
     
   };
   
-  if (expectClause || stack !== 0 || lastIndex < filter.length) {
+  if ( expectClause || stack !== 0 || lastIndex < filter.length ) {
     
     return null;
     
