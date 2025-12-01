@@ -15,9 +15,9 @@ export function analytics(
   nonInteraction = false,
 ) {
   
-  if (CONFIG.googleAnalyticsId) {
+  if ( CONFIG.googleAnalyticsId ) {
     
-    if (action) {
+    if ( action ) {
       
       ReactGA.event({
         category,
@@ -27,7 +27,7 @@ export function analytics(
       });
       
     };
-    if (!action) {
+    if ( !action ) {
       
       ReactGA.pageview(category);
       
