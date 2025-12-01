@@ -3,33 +3,35 @@
 import ReactGA from 'react-ga4';
 
 /**
- * @param {string} category
- * @param {string} [action]
- * @param {string} [label]
- * @param {boolean} [nonInteraction]
+ * @param { string } category
+ * @param { string } action
+ * @param { string } label
+ * @param { boolean } nonInteraction
 **/
 export function analytics(
   category,
   action = '',
   label = '',
-  nonInteraction = false,
+  nonInteraction = false
 ) {
   
   if ( CONFIG.googleAnalyticsId ) {
     
     if ( action ) {
       
-      ReactGA.event({
+      ReactGA.event( {
+        
         category,
         action,
         label,
-        nonInteraction,
-      });
+        nonInteraction
+        
+      } );
       
     };
     if ( !action ) {
       
-      ReactGA.pageview(category);
+      ReactGA.pageview( category );
       
     };
     
