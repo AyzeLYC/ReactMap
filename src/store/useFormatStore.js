@@ -13,7 +13,7 @@ const UNITS = /** @type { const } **/ ([
 ]);
 
 /** @param { string } locale **/
-const getFormatters = ( locale ) => ({
+const getFormatters = ( locale ) => ( {
   dateFormat: new Intl.DateTimeFormat( locale, {
     
     dateStyle: 'medium',
